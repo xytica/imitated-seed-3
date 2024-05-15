@@ -1,10 +1,11 @@
 {
-  "engines": {
-    "node": "12"
+  "engines" : { 
+    "node": ">=20.13.1",
+    "bun": ">=1.1.1"
   },
-  "name": "imitated-seed-v2",
+  "name": "imitated-seed-v3",
   "version": "4.12.0",
-  "description": "더 시드 모방 엔진.",
+  "description": "더 시드 모방 엔진 (최신형).",
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -33,7 +34,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gdl-888/imitated-seed-v2.git"
+    "url": "git+https://github.com/xytica/imitated-seed-3.git"
   },
   "keywords": [
     "theseed",
@@ -43,7 +44,7 @@
   "author": "ㅇ",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/gdl-888/imitated-seed-v2/issues"
+    "url": "https://github.com/xytica/imitated-seed-3/issues"
   },
-  "homepage": "https://github.com/gdl-888/imitated-seed-v2#readme"
+  "homepage": "https://github.com/xytica/imitated-seed-3#readme"
 }
