@@ -1,26 +1,24 @@
-/* 병아리 엔진 - the seed 모방 프로젝트 */
+'use strict';
 
-const http = require('http');
-const https = require('https');
-const path = require('path');
-const geoip = require('geoip-lite');
-const inputReader = require('wait-console-input');
-const { SHA3 } = require('sha3');
-const md5 = require('md5');
-const express = require('express');
-const session = require('express-session');
-const swig = require('swig');
-const ipRangeCheck = require('ip-range-check');
-const bodyParser = require('body-parser');
-const fs = require('fs');
-const diff = require('./cemerick-jsdifflib.js');
-const cookieParser = require('cookie-parser');
-const child_process = require('child_process');
-const captchapng = require('captchapng');
-const fileUpload = require('express-fileupload');
+import https from 'https';
+import inputReader from 'wait-console-input';
+import md5 from 'md5';
+import express from 'express';
+import session from 'express-session';
+import swig from 'swig';
+import bodyParser from 'body-parser';
+import fs from 'fs';
+import cookieParser from 'cookie-parser';
+import child_process from 'child_process';
+import fileUpload from 'express-fileupload';
 
-function print(x) { console.log(x); }
-function prt(x) { process.stdout.write(x); }
+function print(x){
+	console.log(x);
+}
+
+function prt(x){
+	process.stdout.write(x);
+}
 
 // 삐
 function beep(cnt = 1) { // 경고음 재생
@@ -35,7 +33,7 @@ function input(prpt) {
 }
 
 async function init() {
-	const database = require('./database');
+	const database = import('./database');
 	for(var item in database) global[item] = database[item];
 	
 	print('병아리 - the seed 모방 엔진에 오신것을 환영합니다.\n');
@@ -91,7 +89,7 @@ async function init() {
 	};
 	
 	// 테이블 만들기
-	prt('\n데이타베이스 테이블을 만드는 중... ');
+	prt('\n데이터베이스 테이블을 만드는 중... ');
 	for(var table in tables) {
 		var sql = '';
 		sql = `CREATE TABLE ${table} ( `;
@@ -105,7 +103,7 @@ async function init() {
 	print('완료!');
 	
 	prt('이름공간 ACL을 만드는 중... ');
-	for(var namespc of ['문서', '틀', '분류', '파일', '더 시드']) {
+	for(const namespc of ['문서', '틀', '분류', '파일', '더 시드']) {
 		await curs.execute("INSERT INTO acl (title, namespace, id, type, action, expiration, conditiontype, condition, ns) VALUES ('', '" + namespc + "', '1', 'read', 'allow', '0', 'perm', 'any', '1')");
 		await curs.execute("INSERT INTO acl (title, namespace, id, type, action, expiration, conditiontype, condition, ns) VALUES ('', '" + namespc + "', '1', 'edit', 'deny', '0', 'perm', 'blocked_ipacl', '1')");
 		await curs.execute("INSERT INTO acl (title, namespace, id, type, action, expiration, conditiontype, condition, ns) VALUES ('', '" + namespc + "', '2', 'edit', 'deny', '0', 'perm', 'suspend_account', '1')");
@@ -164,7 +162,7 @@ async function init() {
 	await curs.execute("insert into aclgroup_groups (name, css, warning_description, disallow_signup) values ('차단된 사용자', 'text-decoration: line-through !important; color: gray !important;', '', '1')");
 	print('완료!');
 	
-	fs.writeFileSync('config.json', JSON.stringify(hostconfig), 'utf8');
+	fs.writeFileSync('config.json', JSON.stringify(hostconfig, null, 2), 'utf8');
 	print('\n준비 완료되었습니다. 엔진을 다시 시작하십시오.');
 	process.exit(0);
 }
@@ -172,11 +170,11 @@ async function init() {
 if(!fs.existsSync('./config.json')) {
 	init();
 } else {
-const router = require('./routes/router');
-const hostconfig = require('./hostconfig');
+const router = import('./routes/router');
+const hostconfig = import('./hostconfig');
 const wiki = express();  // 서버
 
-const functions = require('./functions');
+const functions = import('./functions');
 for(var item in functions) global[item] = functions[item];
 cacheSkinList();
 
@@ -295,7 +293,7 @@ wiki.get(/^\/w$/, redirectToFrontPage);
 wiki.get(/^\/w\/$/, redirectToFrontPage);
 wiki.get('/', redirectToFrontPage);
 
-//if(1) wiki.use('/', require('./frontends/nuxt/frontend')); else
+//if(1) wiki.use('/', import('./frontends/nuxt/frontend')); else
 wiki.use('/', router);
 
 // 404 페이지
@@ -528,7 +526,7 @@ wiki.use(function(req, res, next) {
 			try {
 				await curs.execute("alter table files\nADD url text;");
 				hostconfig.disable_file_server = true;
-				fs.writeFile('config.json', JSON.stringify(hostconfig), 'utf8', () => 1);
+				fs.writeFile('config.json', JSON.stringify(hostconfig, null, 2), 'utf8', () => 1);
 			} catch(e) {}
 		} case 20: {
 			try {
