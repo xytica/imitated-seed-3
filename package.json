@@ -5,6 +5,7 @@
   },
   "name": "imitated-seed-v3",
   "version": "4.12.0",
+  "type": "module",
   "description": "더 시드 모방 엔진 (최신형).",
   "main": "server.js",
   "dependencies": {
