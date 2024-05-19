@@ -23,7 +23,8 @@
     - https://theseed.io/js/theseed.js, https://theseed.io/js/jquery-2.1.4.min.js, https://theseed.io/js/jquery-1.11.3.min.js, https://theseed.io/js/intersection-observer.js, https://theseed.io/js/dateformatter.js )를 각각 다운로드받아 js 디렉토리에 복사한다.
     - https://theseed.io/css/wiki.css, https://theseed.io/css/katex.min.css, https://theseed.io/css/diffview.css )를 각각 다운로드받아 css 디렉토리에 복사한다.
 - skins 디렉토리를 만든다.
-  - [buma](https://github.com/LiteHell/theseed-skin-buma/tree/d77eef50a77007da391c5082b4b94818db372417), [liberty](https://github.com/namuwiki/theseed-skin-liberty/tree/153cf78f70206643ec42e856aff8280dc21eb2c0) 등 원하는 스킨을 내려받고 skins 디렉토리에 스킨 이름으로 하위디렉토리를 만들어 복사한다.
+ - 기본 스킨을 사용할 경우, [buma](https://github.com/LiteHell/theseed-skin-buma/tree/d77eef50a77007da391c5082b4b94818db372417), [liberty](https://github.com/namuwiki/theseed-skin-liberty/tree/153cf78f70206643ec42e856aff8280dc21eb2c0) 등 원하는 스킨을 내려받고 skins 디렉토리에 스킨 이름으로 하위디렉토리를 만들어 복사한다. nuxt.js 파일은 엔진에 기본 내장되어 있으니 필요시 수동으로 추가할 것.
+ - imitated-seed-3 포팅 스킨을 사용할 경우, 추가바람
 - `npm i`를 실행한다.
 - `node server` or `bun server`를 실행한다.
 
@@ -37,7 +38,7 @@
 ## 추가 도구(CLI)
 - backlink-reset.js: 역링크 초기화
 - undelete-thread.js: 삭제된 토론 복구
-- namuwiki-importer.js: 나무위키 데이타베이스 덤프 가져오기
+- namuwiki-importer.js: 나무위키 데이터베이스 덤프 가져오기
 
 ## config.json
 - config.json 수정으로 숨겨진 설정을 제어할 수 있다.
